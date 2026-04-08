@@ -127,6 +127,9 @@ During development, a merge conflict occurred when:
 - No forced push required
 - Conflict resolved safely
 
+Example commit:
+be82b56 docs: add README
+
 ---
 
 ## 7. Best Practices Applied
