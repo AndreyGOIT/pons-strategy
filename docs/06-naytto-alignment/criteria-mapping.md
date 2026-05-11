@@ -39,23 +39,25 @@ Each criterion is mapped to:
 
 ### 3.2 Software Development (45 osp)
 
-| Criteria                   | Evidence                                      | Location            | Sprint   | Level             |
-| -------------------------- | --------------------------------------------- | ------------------- | -------- | ----------------- |
-| Application implementation | Full-stack system (React + Node)              | pons-web repo       | All      | Kiitettävä        |
-| Logic implementation       | Backend services and controllers              | backend docs        | All      | Kiitettävä        |
-| Database integration       | SQL schema and queries                        | database-design.md  | All      | Kiitettävä        |
-| Error handling             | Centralized error strategy (planned/improved) | implementation docs | Sprint 2 | Hyvä → Kiitettävä |
+| Criteria                   | Evidence                                                                | Location                                  | Sprint   | Level      |
+| -------------------------- | ----------------------------------------------------------------------- | ----------------------------------------- | -------- | ---------- |
+| Application implementation | Full-stack system (React + Node)                                        | pons-web repo                             | All      | Kiitettävä |
+| Logic implementation       | Backend services and controllers                                        | backend docs                              | All      | Kiitettävä |
+| Database integration       | SQL schema and queries                                                  | database-design.md                        | All      | Kiitettävä |
+| Error handling             | Centralized AppError architecture and global error middleware           | implementation docs + backend controllers | Sprint 2 | Kiitettävä |
+| Validation                 | Entity validation with class-validator and unified validation responses | validation.md + backend controllers       | Sprint 2 | Kiitettävä |
+| Backend architecture       | Refactored controller structure and reusable backend utilities          | project-structure.md                      | Sprint 2 | Kiitettävä |
 
 ---
 
 ### 3.3 Version Control & DevOps (45 osp)
 
-| Criteria           | Evidence                  | Location     | Sprint   | Level             |
-| ------------------ | ------------------------- | ------------ | -------- | ----------------- |
-| Git usage          | Commit history, branching | GitHub repos | All      | Kiitettävä        |
-| Branching strategy | main/dev/feature workflow | devops docs  | Sprint 1 | Kiitettävä        |
-| Deployment         | Docker / hosting setup    | devops docs  | Sprint 3 | Hyvä → Kiitettävä |
-| CI/CD              | Basic pipeline            | devops docs  | Sprint 2 | Hyvä              |
+| Criteria           | Evidence                                          | Location     | Sprint   | Level             |
+| ------------------ | ------------------------------------------------- | ------------ | -------- | ----------------- |
+| Git usage          | Commit history, branching                         | GitHub repos | All      | Kiitettävä        |
+| Branching strategy | main/dev/feature workflow                         | devops docs  | Sprint 1 | Kiitettävä        |
+| Deployment         | Docker / hosting setup                            | devops docs  | Sprint 3 | Hyvä → Kiitettävä |
+| CI/CD              | Planned CI/CD workflow and deployment preparation | devops docs  | Sprint 3 | Hyvä              |
 
 ---
 
@@ -115,6 +117,10 @@ To support evaluation, each area includes:
 - Clear reasoning and trade-offs
 - Professional workflow (Git, DevOps)
 - Reflection and continuous improvement
+- Centralized backend error handling
+- Consistent API response structure
+- Backend architecture refactoring
+- Validation strategy and maintainability improvements
 
 ---
 
@@ -123,3 +129,7 @@ To support evaluation, each area includes:
 This mapping ensures that all project activities are directly aligned with näyttö evaluation criteria.
 
 The project is structured not only to function technically, but also to demonstrate professional competence at a high level.
+
+Sprint 2 significantly strengthened the technical quality of the project by improving backend consistency, validation handling, and architectural maintainability.
+
+The implemented solutions demonstrate not only functional software development skills, but also professional engineering practices expected at the Kiitettävä level.
