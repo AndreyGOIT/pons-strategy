@@ -17,6 +17,8 @@ The goal is to:
 
 Validation is implemented using `class-validator`.
 
+The project currently uses entity-based validation together with TypeScript models and centralized error handling.
+
 Validation is applied at the **entity level**, ensuring that data stored in the database meets defined constraints.
 
 Example:
@@ -55,11 +57,7 @@ user.password = password;
 const errors = await validate(user);
 
 if (errors.length > 0) {
-  const error: AppError = new Error("Validation failed");
-  error.status = 400;
-  error.code = "VALIDATION_ERROR";
-  error.details = errors;
-  throw error;
+  throw new AppError("Validation failed", 400, "VALIDATION_ERROR", errors);
 }
 ```
 
@@ -86,6 +84,9 @@ Validation errors are returned using the centralized error handling system:
 - Reusable validation rules
 - Integrated with entities
 - Works seamlessly with error handling middleware
+- TypeScript-friendly validation workflow
+- Integrated with centralized AppError handling
+- Consistent validation response structure
 
 ---
 
@@ -94,7 +95,7 @@ Validation errors are returned using the centralized error handling system:
 - Validation occurs after data mapping (controller layer)
 - No strict schema validation before entity creation
 - Error messages may not be user-friendly
-- No unified validation layer across all endpoints
+- Validation is still partially controller-dependent
 
 ---
 
@@ -104,6 +105,7 @@ Validation errors are returned using the centralized error handling system:
 - Validate input before creating entities
 - Improve error message clarity
 - Standardize validation across all endpoints
+- Introduce reusable DTO validation schemas
 
 ---
 
@@ -114,6 +116,7 @@ Validation is part of the backend architecture:
 - Controllers initiate validation
 - Entities define constraints
 - Errors handled by middleware
+- Validation integrates with centralized AppError middleware
 
 This supports separation of concerns and improves maintainability.
 
@@ -124,3 +127,7 @@ This supports separation of concerns and improves maintainability.
 Validation in Pons.fi ensures data integrity and reliability.
 
 Combined with centralized error handling, it provides a structured and professional approach to managing user input and preventing invalid data from entering the system.
+
+During Sprint 2, validation handling was improved together with centralized error handling to create more predictable API behavior and cleaner backend architecture.
+
+This approach improves maintainability and supports future migration to schema-based validation solutions such as Zod.

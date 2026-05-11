@@ -64,57 +64,95 @@ All API errors follow this structure:
 
 ### 5.1 Global Error Middleware
 
-Example:
+```ts
+import { Request, Response, NextFunction } from "express";
+import { AppError } from "../../server/src/utils/AppError";
 
-```js
-function errorHandler(err, req, res, next) {
-  console.error(err);
+export const globalErrorHandler = (
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  console.error("💥 ERROR:", err);
 
-  res.status(err.status || 500).json({
+  if (err instanceof AppError) {
+    return res.status(err.status).json({
+      success: false,
+      message: err.message,
+      code: err.code,
+      details: err.details,
+    });
+  }
+
+  return res.status(500).json({
     success: false,
-    message: err.message || "Internal server error",
-    code: err.code || "INTERNAL_ERROR",
+    message: "Internal server error",
+    code: "INTERNAL_ERROR",
   });
-}
-
-module.exports = errorHandler;
+};
 ```
 
 ---
 
 ### 5.2 Usage in Express App
 
-```js
-const errorHandler = require("./middleware/errorHandler");
+```ts
+import { globalErrorHandler } from "./middlewares/errorMiddleware";
 
-app.use(errorHandler);
+app.use(globalErrorHandler);
 ```
 
 ---
 
 ### 5.3 Throwing Errors in Services
 
-```js
-const error = new Error("User not found");
-error.status = 404;
-error.code = "USER_NOT_FOUND";
-
-throw error;
+```ts
+throw new AppError("User not found", 404, "USER_NOT_FOUND");
 ```
 
 ---
 
 ### 5.4 Controller Example
 
-```js
-async function getUser(req, res, next) {
-  try {
-    const user = await userService.getUserById(req.params.id);
-    res.json({ success: true, data: user });
-  } catch (err) {
-    next(err);
+```ts
+export const getUser = catchAsync(async (req, res) => {
+  const user = await userService.getUserById(req.params.id);
+
+  if (!user) {
+    throw new AppError("User not found", 404, "USER_NOT_FOUND");
   }
-}
+
+  res.json({
+    success: true,
+    data: user,
+  });
+});
+```
+
+---
+
+### 5.5 AppError Class
+
+The backend uses a custom `AppError` class to standardize operational errors.
+
+Main features:
+
+- HTTP status support
+- Error code support
+- Optional validation details
+- Better TypeScript compatibility
+- Cleaner controller logic
+
+Example:
+
+```ts
+throw new AppError(
+  "Validation failed",
+  400,
+  "VALIDATION_ERROR",
+  validationErrors,
+);
 ```
 
 ---
@@ -147,13 +185,15 @@ Logged and returned as generic errors.
 - Easier debugging
 - Better maintainability
 - Improved user experience
+- Better API consistency across controllers
+- Easier frontend integration
+- Improved TypeScript type safety
 
 ---
 
 ## 8. Future Improvements
 
 - Add structured logging (e.g., Winston)
-- Introduce custom error classes
 - Add error tracking (monitoring)
 - Standardize error codes across system
 
@@ -176,3 +216,7 @@ This supports separation of concerns.
 The centralized error handling strategy improves reliability, maintainability, and clarity of the backend system.
 
 It transforms error handling from ad-hoc implementation into a structured and professional practice.
+
+During Sprint 2, the error handling strategy was fully integrated into the main backend controllers, including user, course, enrollment, trainer, contact, and payment management modules.
+
+This refactoring significantly improved backend consistency and brought the project architecture closer to production-level practices.
