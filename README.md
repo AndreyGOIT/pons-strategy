@@ -116,6 +116,24 @@ Structured demonstration of professional competence
 
 ---
 
+## Overall Project Outcome
+
+By the end of the project, Pons.fi evolved from a functional student-built application into a more structured, maintainable, and professionally documented full-stack system.
+
+Key outcomes include:
+
+- Documented system architecture
+- Centralized backend error handling
+- Validation strategy and typed error model
+- Improved backend maintainability
+- Environment configuration strategy
+- Security overview and deployment awareness
+- Structured Git workflow
+- Sprint-based development and reflection process
+- Direct alignment with näyttö evaluation criteria
+
+The project demonstrates not only technical implementation, but also architectural reasoning, software quality improvement, deployment awareness, and professional development practices.
+
 ## Status
 
 This repository is actively developed as part of the Spring 2026 näyttö preparation.
